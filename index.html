@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard - KatacityFish</title>
+  <title>KatacityFishCalc.</title>
   <meta name="description" content="KatacityFish Dashboard" />
 
   <!-- Bootstrap (CDN) -->
@@ -28,7 +28,7 @@
   <main class="container py-4">
     <header class="mb-4">
       <h1 class="h3">お魚の単価入力</h1>
-      <p class="text-muted">数量を入力すると小計と合計が自動で計算されます。下にグループ照合の結果を表示します。</p>
+      <p class="text-muted">数量を入力すると小計と合計が自動で計算されます。</p>
     </header>
 
     <!-- 合計表示（合計をコピーするボタン） -->
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <!-- 品目一覧を2列に分割 -->
+    <!-- 品目一覧を2列に分割（指定順にソート・名前置換済） -->
     <section>
       <div class="row">
         <div class="col-md-6">
@@ -64,19 +64,27 @@
                   <tr><th>品目</th><th>単価</th><th style="width:160px">個数</th><th style="width:120px">小計</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>マダラ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>イワシ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>サバ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>カタクチ</td><td class="monospace">¥13,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="13000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>シャケ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>キハダ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <!-- 1列目 -->
                   <tr><td>パーチ</td><td class="monospace">¥12,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="12000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>フエダイ</td><td class="monospace">¥15,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ボタンエビ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ハタ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>うに</td><td class="monospace">¥56,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="56000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>サンゴ</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="24000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>カタクチイワシ</td><td class="monospace">¥13,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="13000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>イワシ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>マダラ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>サバ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>サケ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
+
                   <tr><td>タラピア</td><td class="monospace">¥14,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="14500"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ブラッククラッピー</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ブルーギル</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ナマズ</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>                  <tr><td>ブラウントラウト</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="18000"></td><td class="monospace row-subtotal">¥0</td></tr>
+
+                  <tr><td>マス</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="18000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>コダラ</td><td class="monospace">¥18,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="18500"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ニジマス</td><td class="monospace">¥600,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="600000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>オヒョウ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ストライブ</td><td class="monospace">¥100,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="100000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>レッド</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="24000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>シイラ</td><td class="monospace">¥28,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="28000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>イルカ</td><td class="monospace">¥900,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="900000"></td><td class="monospace row-subtotal">¥0</td></tr>
                 </tbody>
               </table>
             </div>
@@ -92,40 +100,26 @@
                   <tr><th>品目</th><th>単価</th><th style="width:160px">個数</th><th style="width:120px">小計</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>ラッピー</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ブルーギル</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ナマズ</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <!-- 2列目 -->
+                  <tr><td>ジャイアントシーバス</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>
                   <tr><td>エイ</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>シーバス</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>トラウド</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="18000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>キハダマグロ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
                   <tr><td>マグロ</td><td class="monospace">¥200,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="200000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>マス</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="18000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>コダラ</td><td class="monospace">¥18,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="18500"></td><td class="monospace row-subtotal">¥0</td></tr>
                   <tr><td>サメ</td><td class="monospace">¥500,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="500000"></td><td class="monospace row-subtotal">¥0</td></tr>
                   <tr><td>チョウザメ</td><td class="monospace">¥500,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="500000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ニジマス</td><td class="monospace">¥600,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="600000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>オヒョウ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>ストライブ</td><td class="monospace">¥100,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="100000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>レッド</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="24000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>シイラ</td><td class="monospace">¥28,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="28000"></td><td class="monospace row-subtotal">¥0</td></tr>
-                  <tr><td>イルカ</td><td class="monospace">¥900,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="900000"></td><td class="monospace row-subtotal">¥0</td></tr>
+
+                  <tr><td>フエダイ</td><td class="monospace">¥15,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ハタ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>ボタンエビ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>サンゴ</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="24000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td>うに</td><td class="monospace">¥56,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" value="0" data-price="56000"></td><td class="monospace row-subtotal">¥0</td></tr>
+                  <tr><td></td><td class="monospace"></td><td></td><td class="monospace"></td></tr>
+
+                  <tr><td></td><td class="monospace"></td><td></td><td class="monospace"></td></tr>
+                  <tr><td></td><td class="monospace"></td><td></td><td class="monospace"></td></tr>
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- グループ確認セクション -->
-    <section class="mt-4">
-      <div class="card">
-        <div class="card-header">グループ照合結果</div>
-        <div class="card-body">
-          <div id="groupsContainer" class="mb-3"></div>
-          <div id="unmatchedContainer" class="mt-2">
-            <div class="muted-small">照合できなかった品目（表の名前と一致しないもの）:</div>
-            <ul id="unmatchedList" class="mb-0"></ul>
           </div>
         </div>
       </div>
@@ -181,157 +175,16 @@
       }
     }
 
-    // グループデータ（ユーザー指定）
-    const groups = [
-      ["パーチ","ジャイアントシーバス"],
-      ["カタクチイワシ","エイ"],
-      ["イワシ","キハダマグロ"],
-      ["マダラ","マグロ"],
-      ["サバ","サメ"],
-      ["サケ","チョウザメ"],
-
-      ["タラピア","フエダイ"],
-      ["ブラッククラッピー","ハタ"],
-      ["ブルーギル","ボタンエビ"],
-      ["ナマズ","サンゴ"],
-      ["ピラニア","うに"],
-      ["ブラウントラウト",""],
-
-      // 単独（右側空）
-      ["マス",""],
-      ["コダラ",""],
-      ["ニジマス",""],
-      ["オヒョウ",""],
-      ["ストライブ",""],
-      ["レッド",""],
-      ["シイラ",""],
-      ["イルカ",""]
-    ];
-
-    function normalizeName(s){
-      return String(s||'').replace(/\s+/g,'').replace(/ー/g,'').trim().toLowerCase();
-    }
-
-    const alias = {
-      "シャケ":"サケ",
-      "キハダ":"キハダマグロ",
-      "トラウド":"ブラウントラウト",
-      "カタクチ":"カタクチイワシ"
-    };
-
-    // 表の品目を取得（左右両方）
-    function getTableItems(){
-      const rows = Array.from(document.querySelectorAll('#itemsTableLeft tbody tr, #itemsTableRight tbody tr'));
-      return rows.map(r => r.cells[0]?.textContent.trim()).filter(Boolean);
-    }
-
-    function matchItemsToGroups(tableItems){
-      const result = groups.map(g => ({ key: g.join(' / '), members: [], source: g.slice() }));
-      const unmatched = [];
-
-      tableItems.forEach(item => {
-        const nItem = normalizeName(item);
-        const aliased = alias[item] ? alias[item] : alias[nItem] ? alias[nItem] : null;
-        let found = false;
-
-        for (let i=0;i<groups.length;i++){
-          const g = groups[i];
-          for (let j=0;j<g.length;j++){
-            if (!g[j]) continue;
-            const gname = g[j];
-            const ng = normalizeName(gname);
-
-            if (ng && (ng.includes(nItem) || nItem.includes(ng) || ng === nItem)) {
-              result[i].members.push(item);
-              found = true;
-              break;
-            }
-
-            if (aliased){
-              const nAli = normalizeName(aliased);
-              if (ng === nAli || nAli.includes(ng) || ng.includes(nAli)){
-                result[i].members.push(item);
-                found = true;
-                break;
-              }
-            }
-          }
-          if (found) break;
-        }
-
-        if (!found){
-          const aliasMatch = Object.entries(alias).find(([k,v]) => normalizeName(v) === nItem || normalizeName(k) === nItem);
-          if (aliasMatch){
-            const aliasValue = aliasMatch[1];
-            for (let i=0;i<groups.length;i++){
-              if (groups[i].some(g => normalizeName(g) === normalizeName(aliasValue))){
-                result[i].members.push(item);
-                found = true;
-                break;
-              }
-            }
-          }
-        }
-
-        if (!found) unmatched.push(item);
-      });
-
-      return { groups: result, unmatched };
-    }
-
-    function renderGroupReport(){
-      const tableItems = getTableItems();
-      const { groups: mapped, unmatched } = matchItemsToGroups(tableItems);
-      const container = document.getElementById('groupsContainer');
-      container.innerHTML = '';
-
-      mapped.forEach(g => {
-        const div = document.createElement('div');
-        div.className = 'mb-2';
-        const title = document.createElement('div');
-        title.className = 'fw-semibold';
-        title.textContent = g.key;
-        const members = document.createElement('div');
-        members.className = 'muted-small';
-        members.textContent = g.members.length ? g.members.join('、') : '（該当なし）';
-        div.appendChild(title);
-        div.appendChild(members);
-        container.appendChild(div);
-      });
-
-      const ul = document.getElementById('unmatchedList');
-      ul.innerHTML = '';
-      if (unmatched.length === 0){
-        const li = document.createElement('li'); li.textContent = 'なし'; ul.appendChild(li);
-      } else {
-        unmatched.forEach(n => {
-          const li = document.createElement('li'); li.textContent = n; ul.appendChild(li);
-        });
-      }
-    }
-
-    // イベント登録・初期化は DOMContentLoaded 内で行う
+    // イベント登録・初期化
     document.addEventListener('DOMContentLoaded', function(){
-      // 合計ボタン
       document.getElementById('copyTotalBtn')?.addEventListener('click', copyTotal);
-
-      // 入力イベント
       document.addEventListener('input', function(e){
         if (e.target && e.target.classList && e.target.classList.contains('qty-input')) {
           updateTotals();
         }
       });
-
-      // 初期計算・グループ表示
       updateTotals();
-      renderGroupReport();
     });
-
-    // 万が一すでに読み込まれている場合
-    if (document.readyState === 'interactive' || document.readyState === 'complete') {
-      // 少し遅らせて確実に要素が存在する状態で動かす
-      setTimeout(()=>{ updateTotals(); renderGroupReport(); }, 0);
-    }
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
