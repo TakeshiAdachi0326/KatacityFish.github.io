@@ -1,127 +1,179 @@
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KatacityFish</title>
-  <meta name="description" content="KatacityFish GitHub Pages" />
-
-  <!-- Bootstrap 5 (CDN) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome (for icons, optional) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-
-  <!-- Template custom styles: (コピーした場合) -->
-  <link rel="stylesheet" href="css/styles.css" />
-  <style>
-    /* 最低限のオーバーライド（必要なら削除） */
-    body { min-height: 100vh; }
-    .site-brand { font-weight:700; letter-spacing: .04em; }
-  </style>
-</head>
-<body class="bg-light">
-
-  <!-- Top navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-    <div class="container">
-      <a class="navbar-brand site-brand" href="#">KatacityFish</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="トグルナビ">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="topNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#overview">概要</a></li>
-          <li class="nav-item"><a class="nav-link" href="#features">機能</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">お問い合わせ</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header class="py-5 bg-white border-bottom">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-7">
-          <h1 class="display-5 fw-bold">ようこそ KatacityFish へ</h1>
-          <p class="lead mb-4">GitHub Pages と Bootstrap を使ったシンプルで見栄えの良いテンプレートです。</p>
-          <a href="#features" class="btn btn-primary btn-lg">機能を見る</a>
-        </div>
-        <div class="col-lg-5 d-none d-lg-block text-center">
-          <!-- 任意の画像を assets に配置して差し替えてください -->
-          <img src="assets/img/illustration.png" alt="" class="img-fluid" style="max-height:220px;">
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="container py-5">
-    <section id="overview" class="mb-5">
-      <h2 class="h3 mb-3">概要</h2>
-      <p>ここにサイトやプロジェクトの短い紹介を書きます。GitHub Pages に公開する情報やリンクを載せてください。</p>
-    </section>
-
-    <section id="features" class="mb-5">
-      <h2 class="h3 mb-3">機能</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-code me-2 text-primary"></i> モダンなスタック</h5>
-              <p class="card-text">Bootstrap 5 と静的ホスティングで軽快に動きます。</p>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - SB Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand ps-3" href="index.html">KATACITYお魚買取ツール</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <!-- Dashboard のみ残す -->
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        KATACITYお魚買取ツール
+                    </div>
+                </nav>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-paint-brush me-2 text-primary"></i> カスタマイズ容易</h5>
-              <p class="card-text">styles.css を編集して色やレイアウトを変更できます。</p>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Dashboard</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Primary Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Warning Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Success Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Danger Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Area Chart Example
+                                    </div>
+                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Bar Chart Example
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                DataTable Example
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <!-- ...existing table rows... -->
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                        </tr>
+                                        <!-- 残りの行はそのまま -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-share-alt me-2 text-primary"></i> GitHub Pages に対応</h5>
-              <p class="card-text">そのまま push すれば GitHub Pages で公開できます。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="mb-5">
-      <h2 class="h3 mb-3">お問い合わせ</h2>
-      <p>連絡先: <a href="mailto:example@example.com">example@example.com</a></p>
-    </section>
-  </main>
-
-  <footer class="bg-white border-top py-3">
-    <div class="container text-center">
-      <small class="text-muted">&copy; 2025 KatacityFish</small>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS (bundle includes Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- テンプレート固有のスクリプト（コピーしている場合） -->
-  <script src="js/scripts.js"></script>
-
-  <script>
-    // アンカーのスムーズスクロール（任意）
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href').slice(1);
-        const t = document.getElementById(id);
-        if(!t) return;
-        e.preventDefault();
-        t.scrollIntoView({behavior:'smooth'});
-      });
-    });
-  </script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
 </html>
