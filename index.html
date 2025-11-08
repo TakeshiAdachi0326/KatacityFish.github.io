@@ -12,6 +12,7 @@
   <style>
     .small-input { max-width:100px; }
     .monospace { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace; }
+    .muted-small { font-size:0.85rem; color:#6c757d; }
   </style>
 </head>
 <body>
@@ -27,10 +28,10 @@
   <main class="container py-4">
     <header class="mb-4">
       <h1 class="h3">お魚の単価入力</h1>
-      <p class="text-muted">数量を入力すると小計と合計が自動で計算されます。</p>
+      <p class="text-muted">数量を入力すると小計と合計が自動で計算されます。下にグループ照合の結果を表示します。</p>
     </header>
 
-    <!-- 合計表示（合計をコピーするボタンを追加） -->
+    <!-- 合計表示（合計をコピーするボタン） -->
     <div class="row mb-4 g-3">
       <div class="col-sm-6 col-md-4">
         <div class="card shadow-sm">
@@ -51,12 +52,12 @@
       </div>
     </div>
 
-    <!-- テーブル（各行のコピーボタンを削除） -->
+    <!-- テーブル（各行のコピーボタンは不要） -->
     <section>
       <div class="card">
         <div class="card-header">品目一覧</div>
         <div class="card-body table-responsive">
-          <table class="table table-striped align-middle mb-0">
+          <table id="itemsTable" class="table table-striped align-middle mb-0">
             <thead>
               <tr>
                 <th>品目</th>
@@ -101,6 +102,21 @@
         </div>
       </div>
     </section>
+
+    <!-- グループ確認セクション -->
+    <section class="mt-4">
+      <div class="card">
+        <div class="card-header">グループ照合結果</div>
+        <div class="card-body">
+          <div id="groupsContainer" class="mb-3"></div>
+          <div id="unmatchedContainer" class="mt-2">
+            <div class="muted-small">照合できなかった品目（表の名前と一致しないもの）:</div>
+            <ul id="unmatchedList" class="mb-0"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script>
@@ -142,7 +158,6 @@
         btn.disabled = true;
         setTimeout(()=>{ btn.textContent = prev; btn.disabled = false; }, 1200);
       } catch (err) {
-        // フォールバック
         const ta = document.createElement('textarea');
         ta.value = text;
         document.body.appendChild(ta);
@@ -152,14 +167,161 @@
       }
     }
 
+    // グループデータ（ユーザー指定）
+    const groups = [
+      ["パーチ","ジャイアントシーバス"],
+      ["カタクチイワシ","エイ"],
+      ["イワシ","キハダマグロ"],
+      ["マダラ","マグロ"],
+      ["サバ","サメ"],
+      ["サケ","チョウザメ"],
+
+      ["タラピア","フエダイ"],
+      ["ブラッククラッピー","ハタ"],
+      ["ブルーギル","ボタンエビ"],
+      ["ナマズ","サンゴ"],
+      ["ピラニア","うに"],
+      ["ブラウントラウト",""],
+
+      // 単独（右側空）
+      ["マス",""],
+      ["コダラ",""],
+      ["ニジマス",""],
+      ["オヒョウ",""],
+      ["ストライブ",""],
+      ["レッド",""],
+      ["シイラ",""],
+      ["イルカ",""]
+    ];
+
+    // マッチングをゆるくするヘルパー: 正規化（空白・大文字小文字の差を吸収）
+    function normalizeName(s){
+      return String(s||'').replace(/\s+/g,'').replace(/ー/g,'').trim().toLowerCase();
+    }
+
+    // 追加の簡易別名マップ（既知の差異を補正）
+    const alias = {
+      "シャケ":"サケ",
+      "キハダ":"キハダマグロ",
+      "トラウド":"ブラウントラウト",
+      "カタクチ":"カタクチイワシ",
+      "ストライブ":"ストライブ", // 保持
+      "マグロ":"マグロ"
+    };
+
+    // 表の品目を取得
+    function getTableItems(){
+      const rows = Array.from(document.querySelectorAll('#itemsTable tbody tr'));
+      return rows.map(r => r.cells[0]?.textContent.trim()).filter(Boolean);
+    }
+
+    // 照合アルゴリズム: テーブル名がグループ内のいずれかと包含関係にあるか、別名で一致するかを判定
+    function matchItemsToGroups(tableItems){
+      const result = groups.map(g => ({ key: g.join(' / '), members: [], source: g.slice() }));
+      const unmatched = [];
+
+      tableItems.forEach(item => {
+        const nItem = normalizeName(item);
+        // apply alias if exists
+        const aliased = alias[item] ? alias[item] : alias[nItem] ? alias[nItem] : null;
+        let found = false;
+
+        for (let i=0;i<groups.length;i++){
+          const g = groups[i];
+          for (let j=0;j<g.length;j++){
+            if (!g[j]) continue;
+            const gname = g[j];
+            const ng = normalizeName(gname);
+
+            // direct include or reverse include
+            if (ng && (ng.includes(nItem) || nItem.includes(ng) || normalizeName(gname) === nItem)) {
+              result[i].members.push(item);
+              found = true;
+              break;
+            }
+
+            // alias check
+            if (aliased){
+              const nAli = normalizeName(aliased);
+              if (ng === nAli || nAli.includes(ng) || ng.includes(nAli)){
+                result[i].members.push(item);
+                found = true;
+                break;
+              }
+            }
+          }
+          if (found) break;
+        }
+
+        if (!found){
+          // 最後の試み: alias map values contains item?
+          const aliasMatch = Object.entries(alias).find(([k,v]) => normalizeName(v) === nItem || normalizeName(k) === nItem);
+          if (aliasMatch){
+            // try to assign to group that contains aliasMatch value
+            const aliasValue = aliasMatch[1];
+            for (let i=0;i<groups.length;i++){
+              if (groups[i].some(g => normalizeName(g) === normalizeName(aliasValue))){
+                result[i].members.push(item);
+                found = true;
+                break;
+              }
+            }
+          }
+        }
+
+        if (!found) unmatched.push(item);
+      });
+
+      return { groups: result, unmatched };
+    }
+
+    // 描画
+    function renderGroupReport(){
+      const tableItems = getTableItems();
+      const { groups: mapped, unmatched } = matchItemsToGroups(tableItems);
+      const container = document.getElementById('groupsContainer');
+      container.innerHTML = '';
+
+      mapped.forEach(g => {
+        const div = document.createElement('div');
+        div.className = 'mb-2';
+        const title = document.createElement('div');
+        title.className = 'fw-semibold';
+        title.textContent = g.key;
+        const members = document.createElement('div');
+        members.className = 'muted-small';
+        members.textContent = g.members.length ? g.members.join('、') : '（該当なし）';
+        div.appendChild(title);
+        div.appendChild(members);
+        container.appendChild(div);
+      });
+
+      const ul = document.getElementById('unmatchedList');
+      ul.innerHTML = '';
+      if (unmatched.length === 0){
+        const li = document.createElement('li'); li.textContent = 'なし'; ul.appendChild(li);
+      } else {
+        unmatched.forEach(n => {
+          const li = document.createElement('li'); li.textContent = n; ul.appendChild(li);
+        });
+      }
+    }
+
     // イベント登録
     document.addEventListener('input', function(e){
-      if (e.target && e.target.classList && e.target.classList.contains('qty-input')) updateTotals();
+      if (e.target && e.target.classList && e.target.classList.contains('qty-input')) {
+        updateTotals();
+        // グループ動的更新（必要なら）
+      }
     });
     document.getElementById('copyTotalBtn')?.addEventListener('click', copyTotal);
 
-    // 初期計算
+    // 初期化
     updateTotals();
+    // グループ照合結果を表示（読み込み時）
+    document.addEventListener('DOMContentLoaded', renderGroupReport);
+    // もしDOMContentLoadedが既に発火していたら即時呼び出し
+    if (document.readyState === 'interactive' || document.readyState === 'complete') renderGroupReport();
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
