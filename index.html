@@ -30,27 +30,28 @@
       <p class="text-muted">数量を入力すると小計と合計が自動で計算されます。</p>
     </header>
 
-    <!-- 合計表示 -->
+    <!-- 合計表示（合計をコピーするボタンを追加） -->
     <div class="row mb-4 g-3">
       <div class="col-sm-6 col-md-4">
         <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <div class="text-muted small">小計</div>
-                <div id="totalAmount" class="h5 monospace">¥0</div>
-              </div>
-              <div class="text-end">
-                <div class="text-muted small">合計個数</div>
-                <div id="totalQuantity" class="h5 monospace">0</div>
-              </div>
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small">小計</div>
+              <div id="totalAmount" class="h5 monospace">¥0</div>
+            </div>
+            <div class="text-end">
+              <div class="text-muted small">合計個数</div>
+              <div id="totalQuantity" class="h5 monospace">0</div>
+            </div>
+            <div class="ms-3">
+              <button id="copyTotalBtn" class="btn btn-sm btn-outline-secondary">合計をコピー</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- テーブル -->
+    <!-- テーブル（各行のコピーボタンを削除） -->
     <section>
       <div class="card">
         <div class="card-header">品目一覧</div>
@@ -61,66 +62,40 @@
                 <th>品目</th>
                 <th>単価</th>
                 <th style="width:160px">個数（入力）</th>
-                <th style="width:200px">小計 / 操作</th>
+                <th style="width:140px">小計</th>
               </tr>
             </thead>
             <tbody>
-              <!-- 行フォーマット: 品目 | 単価 | 入力ボックス (data-price) | 小計 + コピー -->
-              <tr>
-                <td>マダラ</td>
-                <td class="monospace">¥14,000</td>
-                <td>
-                  <input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14000">
-                </td>
-                <td class="d-flex align-items-center gap-2">
-                  <div class="monospace row-subtotal">¥0</div>
-                  <button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button>
-                </td>
-              </tr>
-              <tr>
-                <td>イワシ</td>
-                <td class="monospace">¥14,000</td>
-                <td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14000"></td>
-                <td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td>
-              </tr>
-              <tr>
-                <td>サバ</td>
-                <td class="monospace">¥14,000</td>
-                <td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14000"></td>
-                <td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td>
-              </tr>
-              <tr>
-                <td>カタクチ</td>
-                <td class="monospace">¥13,000</td>
-                <td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="13000"></td>
-                <td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td>
-              </tr>
-              <tr><td>シャケ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="20000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>キハダ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="20000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>パーチ</td><td class="monospace">¥12,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="12000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>フエダイ</td><td class="monospace">¥15,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>ボタンエビ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>ハタ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>うに</td><td class="monospace">¥56,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="56000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>サンゴ</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="24000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>タラピア</td><td class="monospace">¥14,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14500"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>ラッピー</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>ブルーギル</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>ナマズ</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="17000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>エイ</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="17000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>シーバス</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="17000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>トラウド</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="18000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>マグロ</td><td class="monospace">¥200,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="200000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>マス</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="18000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>コダラ</td><td class="monospace">¥18,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="18500"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>サメ</td><td class="monospace">¥500,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="500000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>チョウザメ</td><td class="monospace">¥500,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="500000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>ニジマス</td><td class="monospace">¥600,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="600000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>オヒョウ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="20000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>ストライブ</td><td class="monospace">¥100,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="100000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>レッド</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="24000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>シイラ</td><td class="monospace">¥28,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="28000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
-              <tr><td>イルカ</td><td class="monospace">¥900,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="900000"></td><td class="d-flex align-items-center gap-2"><div class="monospace row-subtotal">¥0</div><button class="btn btn-sm btn-outline-secondary copy-btn" type="button">コピー</button></td></tr>
+              <tr><td>マダラ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>イワシ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>サバ</td><td class="monospace">¥14,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>カタクチ</td><td class="monospace">¥13,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="13000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>シャケ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>キハダ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>パーチ</td><td class="monospace">¥12,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="12000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>フエダイ</td><td class="monospace">¥15,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>ボタンエビ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>ハタ</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>うに</td><td class="monospace">¥56,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="56000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>サンゴ</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="24000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>タラピア</td><td class="monospace">¥14,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="14500"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>ラッピー</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>ブルーギル</td><td class="monospace">¥15,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="15500"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>ナマズ</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>エイ</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>シーバス</td><td class="monospace">¥17,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="17000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>トラウド</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="18000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>マグロ</td><td class="monospace">¥200,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="200000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>マス</td><td class="monospace">¥18,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="18000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>コダラ</td><td class="monospace">¥18,500</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="18500"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>サメ</td><td class="monospace">¥500,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="500000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>チョウザメ</td><td class="monospace">¥500,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="500000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>ニジマス</td><td class="monospace">¥600,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="600000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>オヒョウ</td><td class="monospace">¥20,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="20000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>ストライブ</td><td class="monospace">¥100,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="100000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>レッド</td><td class="monospace">¥24,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="24000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>シイラ</td><td class="monospace">¥28,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="28000"></td><td class="monospace row-subtotal">¥0</td></tr>
+              <tr><td>イルカ</td><td class="monospace">¥900,000</td><td><input class="form-control form-control-sm small-input qty-input" type="number" min="0" step="1" value="0" data-price="900000"></td><td class="monospace row-subtotal">¥0</td></tr>
             </tbody>
           </table>
         </div>
@@ -154,28 +129,26 @@
       document.getElementById('totalAmount').textContent = formatYen(totalAmount);
     }
 
-    // コピー処理（ボタン押下で行の小計をクリップボードへ）
-    async function copySubtotalText(btn){
-      const row = btn.closest('tr');
-      if (!row) return;
-      const subEl = row.querySelector('.row-subtotal');
-      if (!subEl) return;
-      const text = subEl.textContent || '';
+    // 合計コピー処理
+    async function copyTotal(){
+      const totalEl = document.getElementById('totalAmount');
+      if (!totalEl) return;
+      const text = totalEl.textContent || '';
       try {
         await navigator.clipboard.writeText(text);
+        const btn = document.getElementById('copyTotalBtn');
         const prev = btn.textContent;
         btn.textContent = 'コピー済';
         btn.disabled = true;
         setTimeout(()=>{ btn.textContent = prev; btn.disabled = false; }, 1200);
       } catch (err) {
-        // フォールバック: 一時 textarea を使う
+        // フォールバック
         const ta = document.createElement('textarea');
         ta.value = text;
         document.body.appendChild(ta);
         ta.select();
-        try { document.execCommand('copy'); btn.textContent = 'コピー済'; } catch(e){}
+        try { document.execCommand('copy'); } catch(e){}
         ta.remove();
-        setTimeout(()=>{ btn.textContent = 'コピー'; }, 1200);
       }
     }
 
@@ -183,12 +156,7 @@
     document.addEventListener('input', function(e){
       if (e.target && e.target.classList && e.target.classList.contains('qty-input')) updateTotals();
     });
-
-    document.addEventListener('click', function(e){
-      if (e.target && e.target.classList && e.target.classList.contains('copy-btn')){
-        copySubtotalText(e.target);
-      }
-    });
+    document.getElementById('copyTotalBtn')?.addEventListener('click', copyTotal);
 
     // 初期計算
     updateTotals();
