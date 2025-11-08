@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>サンプルページ</title>
+  <meta name="description" content="シンプルなインデックスページのテンプレート" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>サンプルサイト</h1>
+    <nav aria-label="メインナビゲーション">
+      <ul>
+        <li><a href="#about">概要</a></li>
+        <li><a href="#services">サービス</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>概要</h2>
+      <p>ここにサイトの紹介文を記載します。</p>
+    </section>
+
+    <section id="services">
+      <h2>サービス</h2>
+      <p>提供するサービスの概要を記載します。</p>
+    </section>
+
+    <section id="contact">
+      <h2>お問い合わせ</h2>
+      <p><a href="mailto:example@example.com">example@example.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 サンプルサイト</p>
+  </footer>
+
+  <script>
+    // アンカーリンクのスムーズスクロール（アクセシビリティ考慮）
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (!target) return;
+        event.preventDefault();
+        target.setAttribute('tabindex', '-1');
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.focus();
+        target.removeAttribute('tabindex');
+      });
+    });
+  </script>
+</body>
+</html>
