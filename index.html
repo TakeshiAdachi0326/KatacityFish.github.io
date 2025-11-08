@@ -5,40 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>サンプルページ</title>
   <meta name="description" content="シンプルなインデックスページのテンプレート" />
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>サンプルサイト</h1>
-    <nav aria-label="メインナビゲーション">
-      <ul>
-        <li><a href="#about">概要</a></li>
-        <li><a href="#services">サービス</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
-      </ul>
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">サンプルサイト</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="ナビゲーション切替">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item"><a class="nav-link" href="#about">概要</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">サービス</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </header>
 
-  <main>
-    <section id="about">
-      <h2>概要</h2>
+  <main class="container py-5">
+    <section id="about" class="mb-5">
+      <h2 class="h3">概要</h2>
       <p>ここにサイトの紹介文を記載します。</p>
     </section>
 
-    <section id="services">
-      <h2>サービス</h2>
+    <section id="services" class="mb-5">
+      <h2 class="h3">サービス</h2>
       <p>提供するサービスの概要を記載します。</p>
     </section>
 
-    <section id="contact">
-      <h2>お問い合わせ</h2>
+    <section id="contact" class="mb-5">
+      <h2 class="h3">お問い合わせ</h2>
       <p><a href="mailto:example@example.com">example@example.com</a></p>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 サンプルサイト</p>
+  <footer class="bg-light text-center py-3">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 サンプルサイト</p>
+    </div>
   </footer>
+
+  <!-- Bootstrap JS (bundle includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     // アンカーリンクのスムーズスクロール（アクセシビリティ考慮）
